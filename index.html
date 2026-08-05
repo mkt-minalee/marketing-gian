@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>마케팅팀 기안 문서함</title>
+<style>
+  :root{--ink:#1f2a3c;--ink2:#475569;--muted:#8b95a7;--line:#e6e9f0;--soft:#f4f7fe;
+    --blue:#4263eb;--blue-d:#3a53c5;--blueSoft:#edf1fe;--blueBorder:#d3ddfb;
+    --green:#12b76a;--green-d:#0e9257;--greenSoft:#e8f8f0;--greenBorder:#bce7ce;
+    --amber:#b9820a;--amberSoft:#fdf5e1;--amberBorder:#f1e4ba;
+    --page:#eef2f8;--card:#fff}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.7}
+  .wrap{max-width:840px;margin:0 auto;padding:44px 20px 80px}
+  .head{margin-bottom:26px}
+  .badge{display:inline-block;padding:5px 13px;border-radius:999px;border:1px solid var(--blueBorder);
+    background:var(--blueSoft);color:var(--blue-d);font-size:12px;font-weight:800}
+  h1{margin:14px 0 6px;font-size:29px;letter-spacing:-.7px}
+  .sub{margin:0;color:var(--muted);font-size:14.5px}
+  a.doc{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:18px;
+    background:var(--card);padding:22px 24px;margin-top:14px;box-shadow:0 1px 3px rgba(31,42,60,.05);transition:.15s;position:relative;overflow:hidden}
+  a.doc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;opacity:0;transition:.15s}
+  a.doc.b::before{background:var(--blue)} a.doc.g::before{background:var(--green)}
+  a.doc:hover{box-shadow:0 8px 22px rgba(66,99,235,.12);transform:translateY(-1px)}
+  a.doc.b:hover{border-color:var(--blueBorder)} a.doc.g:hover{border-color:var(--greenBorder)}
+  a.doc:hover::before{opacity:1}
+  .row{display:flex;align-items:center;gap:16px}
+  .ico{width:54px;height:54px;border-radius:14px;flex:none;display:flex;align-items:center;justify-content:center;
+    font-size:15px;font-weight:900;color:#fff;letter-spacing:-.5px}
+  .ico.b{background:linear-gradient(135deg,#5b7bf5,#3a53c5)}
+  .ico.g{background:linear-gradient(135deg,#22c67e,#0e9257)}
+  .doc h2{margin:0 0 3px;font-size:18px;letter-spacing:-.3px}
+  .doc p{margin:0;color:var(--muted);font-size:13.5px}
+  .tags{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap}
+  .t{font-size:12px;color:var(--ink2);padding:4px 11px;border:1px solid var(--line);border-radius:999px;background:var(--soft)}
+  .t.money{background:var(--amberSoft);border-color:var(--amberBorder);color:var(--amber);font-weight:700}
+  .arrow{margin-left:auto;font-size:22px;font-weight:800;flex:none}
+  .arrow.b{color:var(--blue)} .arrow.g{color:var(--green)}
+  .foot{margin-top:30px;text-align:center;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <span class="badge">마케팅팀 · 내부 공유용</span>
+    <h1>기안 문서함</h1>
+    <p class="sub">아래 문서를 클릭하면 상세 내용을 볼 수 있습니다</p>
+  </div>
+
+  <a class="doc b" href="01_커뮤니티_서포터즈_시범운영안.html">
+    <div class="row">
+      <div class="ico b">기안</div>
+      <div>
+        <h2>커뮤니티 서포터즈 1기 시범 운영안</h2>
+        <p>게임 커뮤니티 내 자연스러운 브랜딩·거래 유입을 위한 서포터즈 시범 운영 제안</p>
+      </div>
+      <span class="arrow b">→</span>
+    </div>
+    <div class="tags"><span class="t">마케팅팀</span><span class="t">작성자 이미나</span><span class="t">2026-07-30</span><span class="t money">예산 3,600,000원</span></div>
+  </a>
+
+  <a class="doc g" href="02_신작_디스코드_선점운영_기안서.html">
+    <div class="row">
+      <div class="ico g">기안</div>
+      <div>
+        <h2>신작 게임 디스코드 커뮤니티 선점 및 운영안</h2>
+        <p>런칭 초기 통합 디스코드 채널 선점 및 거래소 연동을 통한 실 거래 유입 전략</p>
+      </div>
+      <span class="arrow g">→</span>
+    </div>
+    <div class="tags"><span class="t">마케팅팀</span><span class="t">작성자 이미나</span><span class="t">2026-07-30</span><span class="t money">봇 예산 월 $60~80</span></div>
+  </a>
+
+  <div class="foot">© 2026 마케팅팀 · 내부 공유용 문서함 (외부 공유 금지)</div>
+</div>
+</body>
+</html>

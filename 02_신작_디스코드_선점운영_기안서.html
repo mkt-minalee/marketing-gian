@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>[기안서] 신작 게임 디스코드 커뮤니티 선점 및 운영안</title>
+<style>
+  :root{
+    --ink:#111827; --ink2:#374151; --muted:#6b7280; --line:#e5e7eb; --soft:#f9fafb;
+    --acc:#0f766e; --acc-d:#0b5b54; --accSoft:#effcf9; --accBorder:#b7e4dc;
+    --page:#eef0f2; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:30px 20px 80px}
+  a.back{display:inline-block;margin-bottom:16px;color:var(--acc);text-decoration:none;font-size:13.5px;font-weight:700}
+  a.back:hover{text-decoration:underline}
+
+  .top{border:1px solid var(--line);border-radius:22px;padding:30px 30px 26px;background:var(--card);
+    box-shadow:0 1px 3px rgba(17,24,39,.05);position:relative;overflow:hidden}
+  .top::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(var(--acc),var(--acc-d))}
+  .badge{display:inline-block;padding:5px 13px;border-radius:999px;border:1px solid var(--accBorder);
+    background:var(--accSoft);color:var(--acc-d);font-size:12px;font-weight:800;letter-spacing:-.2px}
+  h1{margin:14px 0 8px;font-size:29px;letter-spacing:-.8px;line-height:1.25}
+  .sub{margin:0;color:var(--muted);font-size:15px;max-width:72ch}
+  .goal{margin-top:18px;border-left:4px solid var(--acc);background:var(--accSoft);padding:13px 16px;border-radius:12px;
+    font-weight:700;color:var(--acc-d);font-size:14px}
+  .meta{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+  .meta .m{font-size:13px;color:var(--ink2)}
+  .meta .m b{display:block;color:var(--muted);font-weight:600;font-size:11.5px;margin-bottom:2px;letter-spacing:.2px}
+
+  .sec{margin:38px 0 14px;display:flex;align-items:center;gap:12px}
+  .sec .n{width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;font-size:14px;font-weight:800;
+    display:inline-flex;align-items:center;justify-content:center;flex:none}
+  .sec h2{margin:0;font-size:20px;letter-spacing:-.4px;font-weight:800}
+  .card{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:22px 24px;box-shadow:0 1px 3px rgba(17,24,39,.03)}
+  .card + .card{margin-top:12px}
+  .card h3{margin:0 0 14px;font-size:15px;letter-spacing:-.3px;color:var(--ink);font-weight:800;display:flex;align-items:center;gap:8px}
+  .card h3 .tick{width:5px;height:16px;border-radius:3px;background:var(--acc)}
+
+  .icards{display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:760px){.icards{grid-template-columns:repeat(3,1fr)}}
+  .ic{border:1px solid var(--line);border-radius:15px;background:var(--card);padding:20px;box-shadow:0 1px 3px rgba(17,24,39,.03)}
+  .ic .ci{width:42px;height:42px;border-radius:12px;background:var(--accSoft);border:1px solid var(--accBorder);
+    display:flex;align-items:center;justify-content:center;margin-bottom:13px;color:var(--acc)}
+  .ic h4{margin:0 0 6px;font-size:15px;letter-spacing:-.3px}
+  .ic p{margin:0;font-size:13.5px;color:var(--ink2);line-height:1.65}
+  svg{display:block}
+
+  /* diagnosis */
+  .diag{display:grid;grid-template-columns:1fr;gap:10px}
+  @media(min-width:760px){.diag{grid-template-columns:repeat(3,1fr)}}
+  .prob{border:1px solid var(--line);border-radius:13px;background:var(--soft);padding:16px;position:relative}
+  .prob .pt{font-size:13.5px;font-weight:800;color:var(--ink);margin:0 0 5px;display:flex;align-items:center;gap:7px}
+  .prob .pt .ex{width:20px;height:20px;border-radius:6px;background:#fff3e6;color:#b45309;border:1px solid #f0dcc0;
+    display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex:none}
+  .prob p{margin:0;font-size:12.5px;color:var(--ink2);line-height:1.6}
+
+  .kpi{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(min-width:640px){.kpi.k3{grid-template-columns:repeat(3,1fr)}}
+  .box{border:1px solid var(--line);border-radius:13px;padding:15px 16px;background:var(--soft)}
+  .box .t{margin:0;font-size:12px;color:var(--muted)}
+  .box .v{margin:4px 0 0;font-size:22px;font-weight:900;letter-spacing:-.5px;color:var(--ink)}
+  .box .v small{font-size:12px;font-weight:600;color:var(--muted)}
+  .box .u{margin:3px 0 0;font-size:11.5px;color:var(--muted)}
+  .box.hi{background:var(--accSoft);border-color:var(--accBorder)}
+  .box.hi .v{color:var(--acc-d)}
+
+  /* bot list */
+  .tierlabel{font-size:12px;font-weight:700;color:var(--acc-d);background:var(--accSoft);border:1px solid var(--accBorder);
+    border-radius:999px;padding:3px 11px;display:inline-block;margin:16px 0 8px}
+  .botlist{border:1px solid var(--line);border-radius:13px;overflow:hidden}
+  .bot{display:grid;grid-template-columns:150px 1fr auto;gap:12px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);background:#fff}
+  .bot:last-child{border-bottom:0}
+  .bot .bn{font-weight:800;font-size:13.5px;color:var(--ink)}
+  .bot .bd{font-size:12.5px;color:var(--ink2);line-height:1.5}
+  .bot .bc{font-size:14px;font-weight:800;color:var(--acc-d);white-space:nowrap}
+  .bot.sum{background:var(--accSoft);display:flex;justify-content:space-between;align-items:center}
+  .bot.sum .bl{font-weight:800;font-size:13px;color:var(--acc-d)}
+  .bot.sum .bc{font-size:15px}
+  @media(max-width:560px){.bot{grid-template-columns:1fr auto}.bot .bd{grid-column:1 / -1}}
+  .p2note{margin-top:12px;font-size:12.5px;color:var(--muted);line-height:1.6}
+  .p2note b{color:var(--ink2)}
+  .p2note .tag2{display:inline-block;font-size:11px;font-weight:700;color:var(--muted);background:var(--soft);
+    border:1px solid var(--line);border-radius:999px;padding:2px 8px;margin-right:4px}
+
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+  .chip{font-size:13px;font-weight:600;color:var(--ink);background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:6px 13px}
+  .chip.acc{background:var(--accSoft);border-color:var(--accBorder);color:var(--acc-d)}
+  .ch{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;font-weight:700;
+    background:#eef2f1;color:var(--acc-d);border:1px solid var(--accBorder);border-radius:7px;padding:3px 9px;display:inline-block;margin:3px 4px 0 0}
+
+  .grouplabel{font-size:12.5px;color:var(--muted);margin:2px 0 8px;font-weight:600}
+  .hcard{border:1.5px solid var(--accBorder);background:var(--accSoft);border-radius:14px;padding:18px 20px;margin-top:14px}
+  .hcard .ht{display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:800;color:var(--acc-d);margin-bottom:12px}
+  .hcard .star{width:22px;height:22px;border-radius:7px;background:var(--acc);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px}
+  .crow{display:grid;grid-template-columns:1fr;gap:8px}
+  .cline{display:flex;gap:10px;align-items:baseline;background:#fff;border:1px solid var(--accBorder);border-radius:10px;padding:10px 13px}
+  .cline .cn{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;font-weight:800;color:var(--acc-d);white-space:nowrap}
+  .cline .cd{font-size:13px;color:var(--ink2)}
+
+  ul.clean{margin:6px 0 0;padding:0;list-style:none}
+  ul.clean li{position:relative;padding:6px 0 6px 20px;font-size:14px;color:var(--ink2)}
+  ul.clean li::before{content:"";position:absolute;left:2px;top:14px;width:6px;height:6px;border-radius:50%;background:var(--acc)}
+  ul.clean li b{color:var(--ink)}
+
+  .callout{border-left:4px solid var(--acc);background:var(--accSoft);padding:14px 16px;border-radius:12px;margin-top:16px;color:var(--ink2);font-size:13.5px}
+  .callout b{color:var(--acc-d)}
+
+  .steps3{display:grid;grid-template-columns:1fr;gap:10px}
+  @media(min-width:760px){.steps3{grid-template-columns:repeat(3,1fr)}}
+  .schan{border:1px solid var(--line);border-radius:13px;padding:16px;background:var(--card)}
+  .schan .sn{width:26px;height:26px;border-radius:8px;background:var(--ink);color:#fff;font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-bottom:9px}
+  .schan h4{margin:0 0 5px;font-size:14px}
+  .schan p{margin:0;font-size:12.5px;color:var(--ink2);line-height:1.6}
+
+  .decide{border:1.5px solid var(--accBorder);background:var(--accSoft);border-radius:16px;padding:20px 22px;display:flex;gap:16px;align-items:flex-start}
+  .decide .qi{width:40px;height:40px;border-radius:11px;background:var(--acc);color:#fff;flex:none;display:flex;align-items:center;justify-content:center}
+  .decide h4{margin:0 0 6px;font-size:16px;color:var(--acc-d)}
+  .decide ul{margin:0;padding:0 0 0 18px}
+  .decide li{font-size:14px;color:var(--ink2);margin:4px 0}
+
+  .footer{margin-top:38px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  /* ===== 화사한 팔레트 오버라이드 (블루·그린·앰버·핑크) ===== */
+  :root{
+    --acc:#4263eb; --acc-d:#3a53c5; --accSoft:#edf1fe; --accBorder:#d3ddfb;
+    --page:#eef2f8; --soft:#f4f7fe;
+  }
+  body{background:var(--page)}
+  .sec .n{background:#4263eb}
+  .schan .sn{background:#4263eb}
+  .box.money{background:#fdf5e1;border-color:#f1e4ba}
+  .box.money .t{color:#a97b1e}
+  .box.money .v{color:#b9820a}
+  .prob .ex{background:#fdeded;color:#d64045;border-color:#f6cccc}
+  .decide{border-color:#bce7ce;background:#eafaf2}
+  .decide .qi{background:#12b76a}
+  .decide h4{color:#0e9257}
+  /* 거래소 핵심 채널 = 그린 강조 */
+  .hcard{border-color:#bce7ce;background:#e8f8f0}
+  .hcard .ht{color:#0e9257}
+  .hcard .star{background:#12b76a}
+  .cline{border-color:#cbecda}
+  .cline .cn{color:#0e9257}
+
+  /* ===== 단일 흰색 시트(종이) 레이아웃 ===== */
+  .wrap{max-width:1000px;padding:26px 20px 70px}
+  .sheet{background:#fff;border:1px solid #e9edf4;border-radius:22px;padding:34px 38px 32px;
+    box-shadow:0 6px 30px rgba(31,42,60,.07);position:relative;overflow:hidden}
+  .sheet::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;
+    background:linear-gradient(90deg,#4263eb,#6b8afd)}
+  .top{background:transparent;border:none;box-shadow:none;border-radius:0;padding:8px 0 2px}
+  .top::before{display:none}
+  .meta{background:#f6f8fc;border:1px solid #e9edf4;border-radius:12px;padding:14px 16px;margin-top:18px}
+  .card{background:transparent;border:none;box-shadow:none;padding:0}
+  .card + .card{margin-top:22px}
+  .sec{margin:34px 0 14px}
+  .ic{box-shadow:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← 문서 목록으로</a>
+
+  <div class="sheet">
+  <div class="top">
+    <span class="badge">기안서 · 마케팅팀</span>
+    <h1>신작 게임 디스코드 커뮤니티 선점 및 운영안</h1>
+    <p class="sub">신작 게임 런칭 초기에 통합 디스코드 채널을 선점하고, 거래소 채널·아이템매니아 연동으로 실 거래 유입을 유도하기 위한 운영안</p>
+    <div class="goal">핵심 전략 — 사전예약 공개 직후 72시간 이내 선제 개설로 "공식 통합 디스코드" 포지션 선점</div>
+    <div class="meta">
+      <div class="m"><b>보고일</b>2026-07-30</div>
+      <div class="m"><b>부서(팀)</b>마케팅팀</div>
+      <div class="m"><b>작성자</b>이미나</div>
+      <div class="m"><b>버전</b>v1.0</div>
+    </div>
+  </div>
+
+  <!-- 1. 목적 -->
+  <div class="sec"><span class="n">1</span><h2>목적</h2></div>
+  <div class="icards">
+    <div class="ic">
+      <div class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M12 3v4"/></svg></div>
+      <h4>포지션 선점</h4>
+      <p>런칭 초기 "공식 통합 디스코드" 포지션을 선점해 장기적 채널 지배력을 확보합니다.</p>
+    </div>
+    <div class="ic">
+      <div class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M15 11a3 3 0 100-6"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><path d="M17 15c2.5.4 4 2.2 4 5"/></svg></div>
+      <h4>인지도 확보</h4>
+      <p>채널 활성화를 통해 해당 게임 유저 커뮤니티 내 인지도를 확보합니다.</p>
+    </div>
+    <div class="ic">
+      <div class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h13l-3-3M20 17H7l3 3"/></svg></div>
+      <h4>실 거래 유입</h4>
+      <p>거래소 게시판 연동 및 아이템매니아 연결로 실제 거래 유입을 유도합니다.</p>
+    </div>
+  </div>
+
+  <!-- 2. 현황 -->
+  <div class="sec"><span class="n">2</span><h2>현황 진단</h2></div>
+  <div class="card">
+    <div class="callout" style="margin-top:0"><b>요약</b> — 채널은 개설됐으나 콘텐츠·봇·역할 세팅이 미비해 "간판만 있는 상태". 실질 활성화를 위한 재정비가 필요합니다.</div>
+    <div class="diag" style="margin-top:16px">
+      <div class="prob"><p class="pt"><span class="ex">!</span>낮은 체류율</p><p>채널 개설은 완료됐으나 콘텐츠·봇·역할 세팅이 미비해 신규 유입 후 체류율이 낮음</p></div>
+      <div class="prob"><p class="pt"><span class="ex">!</span>유인 요소 부재</p><p>초기 멤버 유치를 위한 유인 콘텐츠 및 이벤트가 부재한 상태</p></div>
+      <div class="prob"><p class="pt"><span class="ex">!</span>거래 연동 미적용</p><p>아이템매니아 거래 연동 구조가 아직 적용되지 않은 상태</p></div>
+    </div>
+  </div>
+
+  <!-- 3. 채널 선점 전략 -->
+  <div class="sec"><span class="n">3</span><h2>채널 선점 전략</h2></div>
+  <div class="card">
+    <h3><span class="tick"></span>선점 기준 및 타이밍</h3>
+    <div class="kpi k3">
+      <div class="box hi"><p class="t">선제 개설 타이밍</p><p class="v">72<small>시간 이내</small></p><p class="u">사전예약 공개 직후</p></div>
+      <div class="box"><p class="t">선점 포지션</p><p class="v" style="font-size:15px;line-height:1.4">공식 통합<br>디스코드</p></div>
+      <div class="box"><p class="t">대상</p><p class="v" style="font-size:15px;line-height:1.4">대형 게임사<br>신작 기대작</p></div>
+    </div>
+    <div style="margin-top:16px">
+      <div class="grouplabel">대상 게임사 (신작 기대작 중심)</div>
+      <div class="chips"><span class="chip">넥슨</span><span class="chip">엔씨소프트</span><span class="chip">카카오게임즈</span><span class="chip">넷마블</span><span class="chip">등</span></div>
+    </div>
+    <div class="callout">사전예약 공개 직후 <b>72시간 이내</b> 채널을 선제 개설하여 공식 디스코드보다 먼저 "통합 디스코드" 포지션을 선점합니다.</div>
+  </div>
+
+  <!-- 4. 채널 구성 및 운영안 -->
+  <div class="sec"><span class="n">4</span><h2>채널 구성 및 운영안</h2></div>
+  <div class="card">
+    <h3><span class="tick"></span>핵심 채널 구성</h3>
+    <div class="grouplabel">일반 커뮤니티 · 정보 채널</div>
+    <div>
+      <span class="ch">#공지사항</span><span class="ch">#패치노트</span><span class="ch">#공략-팁</span><span class="ch">#자유채팅</span><span class="ch">🔊 음성채널</span>
+    </div>
+    <ul class="clean" style="margin-top:8px"><li>운영 방식 — 봇 자동 수집(RSS) + 알바 수동 업로드 병행</li></ul>
+
+    <div class="hcard">
+      <div class="ht"><span class="star">★</span>거래소 채널 <span style="font-weight:600;color:var(--acc-d)">(핵심 영역)</span></div>
+      <div class="crow">
+        <div class="cline"><span class="cn">#시세-정보</span><span class="cd">알바 일 1회 주요 아이템 시세 요약 게시</span></div>
+        <div class="cline"><span class="cn">#팝니다 / #삽니다</span><span class="cd">유저 직거래 등록 자유화로 커뮤니티 활성화 유도</span></div>
+        <div class="cline"><span class="cn">#매니아-거래링크</span><span class="cd">UTM 파라미터 적용 링크 고정 · 아이템매니아 거래 직접 연결</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="tick"></span>봇 및 유료 서비스 (예상 예산)</h3>
+    <div class="kpi k3">
+      <div class="box"><p class="t">채널당 봇 비용</p><p class="v">약 $26<small>/월</small></p><p class="u">1순위 봇 3종 기준</p></div>
+      <div class="box"><p class="t">운영 채널 수</p><p class="v">4<small>개 채널</small></p></div>
+      <div class="box hi money"><p class="t">예상 예산 합계</p><p class="v">$60~80<small>/월</small></p></div>
+    </div>
+
+    <span class="tierlabel">1순위 · 기본 세팅 (채널당 $26/월)</span>
+    <div class="botlist">
+      <div class="bot"><span class="bn">MEE6 Pro</span><span class="bd">레벨업 시스템 · 역할 자동 부여 · 환영 메시지 · 자동 공지</span><span class="bc">약 $12</span></div>
+      <div class="bot"><span class="bn">Carl-bot Pro</span><span class="bd">반응 역할 부여 · 공지 자동화 · 예약 게시</span><span class="bc">약 $5</span></div>
+      <div class="bot"><span class="bn">RSS봇 <span style="font-weight:600;color:var(--muted)">(Make / IFTTT)</span></span><span class="bd">게임 뉴스 · 패치노트 자동 수집 → 채널 자동 게시</span><span class="bc">약 $9</span></div>
+      <div class="bot sum"><span class="bl">1순위 합계 (채널당)</span><span class="bc">약 $26 / 월</span></div>
+    </div>
+
+    <p class="p2note">
+      <span class="tag2">2순위 · 추가 검토</span>
+      <b>Discord Nitro(부스트)</b> 약 $9.99 — 채널 부스트로 고화질·이모지·파일용량 강화 &nbsp;·&nbsp;
+      <b>Dyno Pro</b> 약 $8 — 스팸 필터·규칙 위반 자동 처리·로그 관리<br>
+      → 1순위 3종으로 기본 자동화를 완성한 뒤, 운영 상황에 따라 2순위를 추가 검토합니다.
+    </p>
+  </div>
+
+  <!-- 5. 초기 활성화 전략 -->
+  <div class="sec"><span class="n">5</span><h2>초기 활성화 전략</h2></div>
+  <div class="steps3">
+    <div class="schan"><div class="sn">1</div><h4>사이트 배너 · 팝업</h4><p>아이템매니아 사이트 배너/팝업에서 디스코드 링크로 연결</p></div>
+    <div class="schan"><div class="sn">2</div><h4>블로그 포스팅</h4><p>"○○게임 공략/시세 디스코드 오픈" 포스팅으로 유입 유도</p></div>
+    <div class="schan"><div class="sn">3</div><h4>커뮤니티 홍보</h4><p>인벤·디씨 등에 초기 홍보 게시 — 게임 정보 글 내 자연스러운 링크 삽입</p></div>
+  </div>
+
+  <!-- 결정 요청 -->
+  <div class="sec"><span class="n">✓</span><h2>결정 요청 사항</h2></div>
+  <div class="decide">
+    <div class="qi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+    <div>
+      <h4>아래 사항에 대한 승인을 요청드립니다</h4>
+      <ul>
+        <li>신작 게임 디스코드 커뮤니티 <b>선점 · 운영 진행 여부</b></li>
+        <li>봇 운영 예산 <b>월 $60~80 (4개 채널 기준, 채널당 약 $26)</b> 집행 승인</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>마케팅팀 · 작성자 이미나</span>
+    <span>기안일 2026-07-30 · v1.0</span>
+  </div>
+  </div><!-- /sheet -->
+</div>
+</body>
+</html>

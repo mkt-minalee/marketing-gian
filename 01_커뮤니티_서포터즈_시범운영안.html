@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>[기안서] 커뮤니티 서포터즈 1기 시범 운영안</title>
+<style>
+  :root{
+    --ink:#111827; --ink2:#374151; --muted:#6b7280; --line:#e5e7eb; --soft:#f9fafb;
+    --acc:#0f766e; --acc-d:#0b5b54; --accSoft:#effcf9; --accBorder:#b7e4dc;
+    --page:#eef0f2; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:30px 20px 80px}
+  a.back{display:inline-block;margin-bottom:16px;color:var(--acc);text-decoration:none;font-size:13.5px;font-weight:700}
+  a.back:hover{text-decoration:underline}
+
+  /* header */
+  .top{border:1px solid var(--line);border-radius:22px;padding:30px 30px 26px;background:var(--card);
+    box-shadow:0 1px 3px rgba(17,24,39,.05);position:relative;overflow:hidden}
+  .top::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(var(--acc),var(--acc-d))}
+  .badge{display:inline-block;padding:5px 13px;border-radius:999px;border:1px solid var(--accBorder);
+    background:var(--accSoft);color:var(--acc-d);font-size:12px;font-weight:800;letter-spacing:-.2px}
+  h1{margin:14px 0 8px;font-size:29px;letter-spacing:-.8px;line-height:1.25}
+  .sub{margin:0;color:var(--muted);font-size:15px;max-width:70ch}
+  .meta{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+  .meta .m{font-size:13px;color:var(--ink2)}
+  .meta .m b{display:block;color:var(--muted);font-weight:600;font-size:11.5px;margin-bottom:2px;letter-spacing:.2px}
+
+  /* section */
+  .sec{margin:38px 0 14px;display:flex;align-items:center;gap:12px}
+  .sec .n{width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;font-size:14px;font-weight:800;
+    display:inline-flex;align-items:center;justify-content:center;flex:none}
+  .sec h2{margin:0;font-size:20px;letter-spacing:-.4px;font-weight:800}
+  .card{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:22px 24px;
+    box-shadow:0 1px 3px rgba(17,24,39,.03)}
+  .card + .card{margin-top:12px}
+  .card h3{margin:0 0 14px;font-size:15px;letter-spacing:-.3px;color:var(--ink);font-weight:800;
+    display:flex;align-items:center;gap:8px}
+  .card h3 .tick{width:5px;height:16px;border-radius:3px;background:var(--acc)}
+
+  /* icon cards (목적/기대효과) */
+  .icards{display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:760px){.icards{grid-template-columns:repeat(3,1fr)}}
+  .ic{border:1px solid var(--line);border-radius:15px;background:var(--card);padding:20px;box-shadow:0 1px 3px rgba(17,24,39,.03)}
+  .ic .ci{width:42px;height:42px;border-radius:12px;background:var(--accSoft);border:1px solid var(--accBorder);
+    display:flex;align-items:center;justify-content:center;margin-bottom:13px;color:var(--acc)}
+  .ic h4{margin:0 0 6px;font-size:15px;letter-spacing:-.3px}
+  .ic p{margin:0;font-size:13.5px;color:var(--ink2);line-height:1.65}
+  svg{display:block}
+
+  /* timeline */
+  .tl{display:grid;grid-template-columns:repeat(4,1fr);margin-top:6px}
+  .tl .seg{position:relative;padding:26px 8px 0;text-align:center}
+  .tl .seg::before{content:"";position:absolute;top:7px;left:0;right:0;height:3px;background:var(--line)}
+  .tl .seg.on::before{background:var(--acc)}
+  .tl .seg:first-child::before{left:50%}
+  .tl .seg:last-child::before{right:50%}
+  .tl .dot{position:absolute;top:1px;left:50%;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;
+    background:#fff;border:3px solid var(--acc);z-index:1}
+  .tl .seg.last .dot{background:var(--acc)}
+  .tl .ph{font-size:13.5px;font-weight:800;color:var(--ink)}
+  .tl .dt{font-size:12.5px;color:var(--acc-d);font-weight:700;margin-top:2px}
+  .tl .du{display:inline-block;margin-top:6px;font-size:11px;font-weight:700;color:var(--muted);
+    background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:2px 9px}
+
+  /* KPI */
+  .kpi{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(min-width:640px){.kpi.k4{grid-template-columns:repeat(4,1fr)}.kpi.k3{grid-template-columns:repeat(3,1fr)}}
+  .box{border:1px solid var(--line);border-radius:13px;padding:15px 16px;background:var(--soft)}
+  .box .t{margin:0;font-size:12px;color:var(--muted)}
+  .box .v{margin:4px 0 0;font-size:22px;font-weight:900;letter-spacing:-.5px;color:var(--ink)}
+  .box .v small{font-size:12px;font-weight:600;color:var(--muted)}
+  .box .u{margin:3px 0 0;font-size:11.5px;color:var(--muted)}
+  .box.hi{background:var(--accSoft);border-color:var(--accBorder)}
+  .box.hi .v{color:var(--acc-d)}
+
+  /* ratio bar */
+  .ratio{margin-top:16px}
+  .ratio .bar{height:26px;border-radius:8px;overflow:hidden;display:flex;border:1px solid var(--line)}
+  .ratio .a{background:var(--acc);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700}
+  .ratio .b{background:var(--ink2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700}
+  .ratio .lg{display:flex;gap:16px;margin-top:8px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+  .ratio .lg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+  /* award mini bars */
+  .awd{margin-top:6px}
+  .awd .r{display:grid;grid-template-columns:64px 1fr 96px;align-items:center;gap:12px;margin:9px 0}
+  .awd .rk{font-size:13px;font-weight:800;color:var(--ink)}
+  .awd .track{height:16px;background:var(--soft);border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+  .awd .fill{height:100%;background:linear-gradient(90deg,var(--acc),var(--acc-d));border-radius:6px}
+  .awd .amt{font-size:13px;font-weight:800;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+  .awd .amt small{color:var(--muted);font-weight:600;font-size:11px}
+
+  /* process flow */
+  .flow{display:grid;grid-template-columns:1fr;gap:10px}
+  @media(min-width:720px){.flow{grid-template-columns:repeat(4,1fr);gap:8px;align-items:stretch}}
+  .fstep{border:1px solid var(--line);border-radius:13px;padding:15px 14px;background:var(--card);position:relative}
+  .fstep .n{width:24px;height:24px;border-radius:7px;background:var(--acc);color:#fff;font-size:12px;font-weight:800;
+    display:inline-flex;align-items:center;justify-content:center;margin-bottom:9px}
+  .fstep .ft{font-size:14px;font-weight:800;margin-bottom:3px}
+  .fstep .fd{font-size:12px;color:var(--muted);line-height:1.55}
+  @media(min-width:720px){.fstep:not(:last-child)::after{content:"›";position:absolute;right:-8px;top:50%;
+    transform:translateY(-50%);color:var(--muted);font-weight:800;font-size:16px;z-index:2}}
+
+  /* chips & lists */
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+  .chip{font-size:13px;font-weight:600;color:var(--ink);background:var(--soft);border:1px solid var(--line);
+    border-radius:999px;padding:6px 13px}
+  .chip.acc{background:var(--accSoft);border-color:var(--accBorder);color:var(--acc-d)}
+  ul.clean{margin:6px 0 0;padding:0;list-style:none}
+  ul.clean li{position:relative;padding:5px 0 5px 20px;font-size:14px;color:var(--ink2)}
+  ul.clean li::before{content:"";position:absolute;left:2px;top:13px;width:6px;height:6px;border-radius:50%;background:var(--acc)}
+  ul.clean li b{color:var(--ink)}
+  .dl{display:grid;grid-template-columns:110px 1fr;gap:6px 14px;font-size:14px;margin-top:4px}
+  .dl dt{color:var(--muted);font-weight:600}
+  .dl dd{margin:0;color:var(--ink2)}
+  .dl dd b{color:var(--ink)}
+
+  .callout{border-left:4px solid var(--acc);background:var(--accSoft);padding:14px 16px;border-radius:12px;
+    margin-top:16px;color:var(--ink2);font-size:13.5px}
+  .callout b{color:var(--acc-d)}
+  .decide{border:1.5px solid var(--accBorder);background:var(--accSoft);border-radius:16px;padding:20px 22px;
+    display:flex;gap:16px;align-items:flex-start}
+  .decide .qi{width:40px;height:40px;border-radius:11px;background:var(--acc);color:#fff;flex:none;
+    display:flex;align-items:center;justify-content:center}
+  .decide h4{margin:0 0 4px;font-size:16px;color:var(--acc-d)}
+  .decide p{margin:0;font-size:14px;color:var(--ink2)}
+
+  .footer{margin-top:38px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);
+    font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  /* ===== 화사한 팔레트 오버라이드 (블루·그린·앰버·핑크) ===== */
+  :root{
+    --acc:#4263eb; --acc-d:#3a53c5; --accSoft:#edf1fe; --accBorder:#d3ddfb;
+    --page:#eef2f8; --soft:#f4f7fe;
+  }
+  body{background:var(--page)}
+  .sec .n{background:#4263eb}
+  .box.money{background:#fdf5e1;border-color:#f1e4ba}
+  .box.money .t{color:#a97b1e}
+  .box.money .v{color:#b9820a}
+  .box.g{background:#e8f8f0;border-color:#bce7ce}
+  .box.g .v{color:#0e9257}
+  .ratio .b{background:#12b76a}
+  .awd .fill{background:linear-gradient(90deg,#eab24a,#c88f0c)}
+  .callout.warn{border-left-color:#e5484d;background:#fdeded}
+  .callout.warn b{color:#c0393e}
+  .tl .seg.cur::before{background:#12b76a}
+  .tl .seg.cur .dot{border-color:#12b76a}
+  .tl .seg.cur .ph{color:#0e9257}
+  .tl .seg.cur .dt{color:#0e9257}
+  .tl .seg.cur .du{color:#0e9257;background:#e8f8f0;border-color:#bce7ce}
+  .decide{border-color:#bce7ce;background:#eafaf2}
+  .decide .qi{background:#12b76a}
+  .decide h4{color:#0e9257}
+  .prob .ex{background:#fdeded;color:#d64045;border-color:#f6cccc}
+  .icards.pos .ci{background:#e8f8f0;border-color:#bce7ce;color:#12b76a}
+  .schan .sn{background:#4263eb}
+
+  /* ===== 단일 흰색 시트(종이) 레이아웃 ===== */
+  .wrap{max-width:1000px;padding:26px 20px 70px}
+  .sheet{background:#fff;border:1px solid #e9edf4;border-radius:22px;padding:34px 38px 32px;
+    box-shadow:0 6px 30px rgba(31,42,60,.07);position:relative;overflow:hidden}
+  .sheet::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;
+    background:linear-gradient(90deg,#4263eb,#6b8afd)}
+  /* 헤더: 시트 위에 직접 */
+  .top{background:transparent;border:none;box-shadow:none;border-radius:0;padding:8px 0 2px}
+  .top::before{display:none}
+  .meta{background:#f6f8fc;border:1px solid #e9edf4;border-radius:12px;padding:14px 16px;margin-top:18px}
+  /* 섹션 래퍼 → 투명 그룹 (내용이 시트 위에 직접 놓임) */
+  .card{background:transparent;border:none;box-shadow:none;padding:0}
+  .card + .card{margin-top:22px}
+  .sec{margin:34px 0 14px}
+  .ic{box-shadow:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← 문서 목록으로</a>
+
+  <div class="sheet">
+  <div class="top">
+    <span class="badge">기안서 · 마케팅팀</span>
+    <h1>커뮤니티 서포터즈 1기 시범 운영안</h1>
+    <p class="sub">게임 커뮤니티 내 자연스러운 브랜딩과 거래 유입 확대를 위한 서포터즈 시범 운영 제안</p>
+    <div class="meta">
+      <div class="m"><b>보고일</b>2026-07-30</div>
+      <div class="m"><b>부서(팀)</b>마케팅팀</div>
+      <div class="m"><b>작성자</b>이미나</div>
+      <div class="m"><b>버전</b>v1.0</div>
+    </div>
+  </div>
+
+  <!-- 1. 목적 -->
+  <div class="sec"><span class="n">1</span><h2>목적</h2></div>
+  <div class="icards">
+    <div class="ic">
+      <div class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg></div>
+      <h4>브랜드 인식 개선</h4>
+      <p>인위적 광고 피로도를 낮추고, 실제 유저 관점의 정보 공유로 자사 브랜드 이미지를 제고합니다.</p>
+    </div>
+    <div class="ic">
+      <div class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg></div>
+      <h4>자연스러운 유입 유도</h4>
+      <p>커뮤니티 내 시세·거래 질의응답과 자연스러운 서비스 노출로 거래 관심 유저 유입을 확대합니다.</p>
+    </div>
+    <div class="ic">
+      <div class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <h4>실시간 모니터링 · 여론 방어</h4>
+      <p>야간·주말 시간대 거래 관련 이슈 발생 시 부정 여론을 사전에 방지합니다.</p>
+    </div>
+  </div>
+
+  <!-- 2. 운영방안 -->
+  <div class="sec"><span class="n">2</span><h2>운영방안</h2></div>
+
+  <div class="card">
+    <h3><span class="tick"></span>운영 기간 및 일정</h3>
+    <div class="tl">
+      <div class="seg on"><span class="dot"></span><div class="ph">모집</div><div class="dt">08.10 ~ 08.23</div><span class="du">2주간</span></div>
+      <div class="seg on"><span class="dot"></span><div class="ph">합격자 발표</div><div class="dt">08.26</div><span class="du">가이드 전달</span></div>
+      <div class="seg on cur"><span class="dot"></span><div class="ph">시범 활동</div><div class="dt">08.27 ~ 10.26</div><span class="du">2개월간</span></div>
+      <div class="seg on last"><span class="dot"></span><div class="ph">우수자 시상</div><div class="dt">10.29</div><span class="du">종합 평가</span></div>
+    </div>
+    <div class="callout">시상은 인기글·조회수·활동량 등을 종합 고려하여 선정합니다.</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="tick"></span>모집 대상 및 채널</h3>
+    <div class="kpi k3">
+      <div class="box hi"><p class="t">모집 인원</p><p class="v">10<small>명</small></p><p class="u">게임별 전담 배치</p></div>
+      <div class="box"><p class="t">대상 게임</p><p class="v">6<small>종</small></p><p class="u">주력 타겟 게임</p></div>
+      <div class="box"><p class="t">지원 방식</p><p class="v" style="font-size:15px;line-height:1.4">구글 폼<br>지원서 접수</p></div>
+    </div>
+    <div style="margin-top:16px">
+      <div style="font-size:12.5px;color:var(--muted);margin-bottom:7px;font-weight:600">대상 게임 (6종)</div>
+      <div class="chips">
+        <span class="chip">리니지클래식</span><span class="chip">리니지M</span><span class="chip">메이플스토리</span>
+        <span class="chip">메이플스토리월드</span><span class="chip">아이온2</span><span class="chip">로스트아크</span>
+      </div>
+    </div>
+    <div style="margin-top:16px">
+      <div style="font-size:12.5px;color:var(--muted);margin-bottom:7px;font-weight:600">대상 채널</div>
+      <div class="chips">
+        <span class="chip acc">인벤 (우대)</span><span class="chip">디시인사이드</span><span class="chip">라운지 등 게임 커뮤니티</span>
+      </div>
+    </div>
+    <div class="callout">모집 방식 — 자사 웹사이트 내부 배너 및 공식 블로그 랜딩 → 구글 폼 지원서 접수</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="tick"></span>활동 범위 및 의무 기준 <span style="color:var(--muted);font-weight:600;font-size:12.5px">(1인당 기준)</span></h3>
+    <div class="kpi k4">
+      <div class="box"><p class="t">게시글 · 주간</p><p class="v">3<small>건</small></p></div>
+      <div class="box hi"><p class="t">게시글 · 월간</p><p class="v">12<small>건</small></p></div>
+      <div class="box"><p class="t">댓글 · 주간</p><p class="v">15<small>건</small></p></div>
+      <div class="box hi g"><p class="t">댓글 · 월간</p><p class="v">60<small>건</small></p></div>
+    </div>
+    <ul class="clean" style="margin-top:14px">
+      <li><b>활동 범위</b> — 게임별 정보성 공략·시세 공유(게시글) 및 거래 문의 답변·긍정 여론 형성(댓글)</li>
+    </ul>
+    <div class="callout warn"><b>채널·게시판 분산 수칙</b> — 특정 게시판 도배 방지를 위해 1개 게시판당 <b>1일 게시글 1건·댓글 2건</b> 초과 금지</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="tick"></span>결과 제출 및 검수 프로세스</h3>
+    <div class="flow">
+      <div class="fstep"><div class="n">1</div><div class="ft">제출</div><div class="fd">서포터즈별 개별 구글 폼으로 주차별 작성 URL·증빙 스크린샷 제출</div></div>
+      <div class="fstep"><div class="n">2</div><div class="ft">자동 취합</div><div class="fd">제출 데이터를 구글 시트 기반으로 자동 취합</div></div>
+      <div class="fstep"><div class="n">3</div><div class="ft">담당자 검수</div><div class="fd">정상 게재 여부·도배 수칙 준수 여부 검증</div></div>
+      <div class="fstep"><div class="n">4</div><div class="ft">활동비 지급</div><div class="fd">검수 통과 건에 한해 활동비 지급</div></div>
+    </div>
+  </div>
+
+  <!-- 3. 소요 예산 -->
+  <div class="sec"><span class="n">3</span><h2>소요 예산</h2></div>
+  <div class="card">
+    <div class="kpi k4">
+      <div class="box hi money"><p class="t">총 예산 <span style="font-size:10px">(VAT 별도)</span></p><p class="v">3,600,000<small>원</small></p></div>
+      <div class="box"><p class="t">기본 활동비</p><p class="v">2,000,000<small>원</small></p><p class="u">10만 × 10명 × 2개월</p></div>
+      <div class="box"><p class="t">우수자 시상금</p><p class="v">1,600,000<small>원</small></p><p class="u">80만/월 × 2개월</p></div>
+      <div class="box"><p class="t">시상 지급 방식</p><p class="v" style="font-size:14px;line-height:1.4">월 단위 산정<br>2개월 합산</p></div>
+    </div>
+
+    <div class="ratio">
+      <div class="bar"><div class="a" style="flex:5">기본 활동비 55.6%</div><div class="b" style="flex:4">시상금 44.4%</div></div>
+      <div class="lg"><span><i style="background:var(--acc)"></i>기본 활동비 2,000,000원</span><span><i style="background:#12b76a"></i>우수자 시상금 1,600,000원</span></div>
+    </div>
+
+    <h3 style="margin:22px 0 4px"><span class="tick"></span>우수 활동자 시상 내역 <span style="color:var(--muted);font-weight:600;font-size:12.5px">(매월 산정 · 인기글·조회수·활동량 등 종합 평가)</span></h3>
+    <div class="awd">
+      <div class="r"><span class="rk">1등 · 1명</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="amt">300,000<small>원/월</small></span></div>
+      <div class="r"><span class="rk">2등 · 1명</span><div class="track"><div class="fill" style="width:66.7%"></div></div><span class="amt">200,000<small>원/월</small></span></div>
+      <div class="r"><span class="rk">3등 · 3명</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="amt">각 100,000<small>원/월</small></span></div>
+    </div>
+    <div class="callout" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <span><b>월 시상 합계</b> 800,000원 &nbsp;(30만 + 20만 + 3명×10만)</span>
+      <span style="font-size:15px;font-weight:800;color:var(--acc-d)">× 2개월 = 1,600,000원</span>
+    </div>
+
+    <div class="callout">
+      <b>기본 활동비 지급 조건</b> — 월 최소 의무 활동량(게시글 12건·댓글 60건) 달성 및 검수 통과 시 지급 &nbsp;|&nbsp;
+      <b>가산점</b> — 커뮤니티(인벤·디씨 등) 내 인기글·추천글·댓글 반응·정보성 등 종합 고려
+    </div>
+  </div>
+
+  <!-- 4. 기대효과 -->
+  <div class="sec"><span class="n">4</span><h2>기대효과</h2></div>
+  <div class="icards pos">
+    <div class="ic">
+      <div class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5.3 5.8.8-4.2 4 1 5.8L12 22l-5.1-3.3 1-5.8-4.2-4 5.8-.8z"/></svg></div>
+      <h4>자연스러운 브랜딩</h4>
+      <p>리니지 라이크 및 주요 거래 타겟 게임 헤비 유저 대상의 자연스러운 브랜딩</p>
+    </div>
+    <div class="ic">
+      <div class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M7 15l3-4 3 2 4-6"/></svg></div>
+      <h4>정보성 데이터 축적</h4>
+      <p>실제 이용 경험 기반의 진정성 있는 거래 후기 및 시세 정보성 데이터 축적</p>
+    </div>
+    <div class="ic">
+      <div class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/></svg></div>
+      <h4>부정 여론 완화</h4>
+      <p>저녁~새벽 등 담당자 부재 시간대에 발생하는 거래 관련 부정 여론의 자발적 완화</p>
+    </div>
+  </div>
+
+  <!-- 결정 요청 -->
+  <div class="sec"><span class="n">✓</span><h2>결정 요청 사항</h2></div>
+  <div class="decide">
+    <div class="qi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+    <div>
+      <h4>커뮤니티 서포터즈 1기 시범 운영 진행 여부</h4>
+      <p>상기 운영안 및 예산 <b>3,600,000원(VAT 별도)</b> 집행에 대한 승인을 요청드립니다.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>마케팅팀 · 작성자 이미나</span>
+    <span>기안일 2026-07-30 · v1.0</span>
+  </div>
+  </div><!-- /sheet -->
+</div>
+</body>
+</html>
